@@ -1,0 +1,22 @@
+#Robot Interaction
+Use a voice detection function that looks for marco, when detected:
+	Use a location detection function based off of the sound.
+	Use the movement functions to move where the sound was determined to be from.
+
+Use motion sensors to simulate touch. If the robot is too close to an object without reaching its target, it rides the perimeter of the object until it reaches the other side, then it continues looking for the target.
+
+A green LED lights up when it finds its target.
+
+We can definitely add more sounds and gestures later, but I'm unsure how far we are going as a team.
+
+#Robot Interface
+I do not believe a digital interface is needed. It'd be more realistic to use simple switches that change its functionality. Think of a Bop It. 
+
+From what we've discussed so far, we'll have both a seeker and a hider mode for the robot.
+
+We will need a button to switch between seeker/hider. We will need a button to turn it on and off.
+
+We could also use a one button system. A long press would turn it on and off. An instant press would change its gamemode.
+
+To monitor the sensor and movement data: We can have it write to a few csv files.
+They would include a timestamp, as well as the relevant data. If we want it to be on the physical robot and extracted off of it, we'd need to have something to store the data on, such as an SSD card. If it is connected to the internet or bluetooth, then we can send it directly to our device.
