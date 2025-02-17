@@ -1,0 +1,10 @@
+The robot will listen to audio the same way it is laid out in the Initial Architecture Document.
+
+The omnidirectional microphone on the PYNQ board will be used to communicate with the bot.
+An external microphone may be needed when playing to determine the direction of the noise.
+
+When seeking, the MPR will look in one direction, say "Marco", and listen for the user's response.
+If a response is not picked up, it will turn 45-90 degrees and try again.
+When a response is heard, it will drive towards the response, going around objects if necessary.
+
+When hiding, MPR will listen for "Marco" and reply "Polo"
