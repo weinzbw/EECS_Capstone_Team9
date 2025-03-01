@@ -1,7 +1,7 @@
 from pynq.overlays.base import BaseOverlay
 base = BaseOverlay("base.bit")
 pAudio = base.audio
-# Not sure if this does anything yet
-pAudio.load("/home/xilinx/jupyter_notebooks/base/audio/data/recording_0.wav")
 
+# Not sure if this does anything yet
+pAudio.load("/home/xilinx/pynq/lib/tests/pynq_welcome.pdm")
 pAudio.play()
