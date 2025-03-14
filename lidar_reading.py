@@ -1,3 +1,17 @@
+"""
+Program Name: lidar_reading.py
+Description: Sets up the lidar sensor to get readings. Will be used for detecting when the MPR is about to hit a wall or if it reached its goal.
+Programmer(s): Ben Weinzirl
+Date Made: 3/02/2025
+Date(s) Revised:
+Preconditions: 
+Postconditions: 
+Errors/Exceptions:
+Side Effects:
+Invariants: 
+Known Faults:
+"""
+
 import numpy as np
 import matplotlib.pyplot as plt
 from rplidar import RPLidar
