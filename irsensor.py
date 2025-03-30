@@ -1,0 +1,31 @@
+"""
+Program Name: irsensor.py
+Description: Sets up and provides readings from the HC-SR501 IR Sensor
+Programmer(s): Ben Weinzirl
+Date Made: 3/30/2025
+Date(s) Revised:
+Preconditions: 
+Postconditions: 
+Errors/Exceptions:
+Side Effects:
+Invariants: 
+Known Faults:
+"""
+
+from pynq.overlays.base import BaseOverlay
+from pynq.lib.pmod import Pmod_ID
+import time
+
+base = BaseOverlay("base.bit")
+
+IRSensor = Pmod_IO(base.PMODB, 0, "out")
+# Only one wire needs to connect to a Pmod set, as the other two are for 5V and ground
+# Change the PMOD and correct number to whatever the sensor ends up being plugged in to
+
+# If statement to determine if a person is in front of the mpr. The distance may need to change once we get ultrasonic readings
+if IRSensor.is_active and distance < 5:
+  print("There is a person!")
+else:
+  print("No person....")
+
+time.sleep(.1)
