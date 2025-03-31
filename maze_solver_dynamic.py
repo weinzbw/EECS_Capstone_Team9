@@ -4,7 +4,8 @@ Description: Proof of concept for a dynamic maze solver using flood-fill algorit
              Assumes the solver does not have prior knowledge of the maze layout.
 Programmer(s): Naran Bat
 Date Made: 2/16/2025
-Date(s) Revised:
+Date(s) Revised:3/30/2025 - Added method to get data from lidar
+                3/30/2025 - Added method to calculate goal position
 Preconditions: 
 Postconditions: 
 Errors/Exceptions:
@@ -14,24 +15,42 @@ Known Faults:
 """
 import time
 from collections import deque
+import numpy as np
+from lidar_reading import get_data  # Import the lidar function
 
-N = 8
-DIRECTIONS = [(-1, 0), (1, 0), (0, -1), (0, 1)]  # Up, Down, Left, Right
+DIRECTIONS = [(0, 1), (1, 0), (0, -1), (-1, 0)]  # Right, Down, Left, Up
 
 class DynamicMazeSolver:
-    def __init__(self, maze, start, goal):
-        self.maze = maze
-        self.start = start
-        self.goal = goal
-        self.robot_position = start
-        self.known_walls = set()
-        self.path = []
-        self.explored = set()
+    def __init__(self, start, goal_angle, goal_distance):
+        self.robot_position = np.array(start, dtype=float) # Start position
+        self.goal_position = self.calculate_goal_position(goal_angle, goal_distance) # Goal position
+        self.known_walls = set() # Set to store known walls
+        self.path = [] # Path to goal
+        self.explored = set()   
+
+    def calculate_goal_position(self, angle, distance):
+        """Converts polar coordinates (angle, distance) into Cartesian coordinates."""
+        goal_x = self.robot_position[0] + distance * np.cos(angle) 
+        goal_y = self.robot_position[1] + distance * np.sin(angle)
+        return np.array([goal_x, goal_y])
 
     def heuristic(self, position):
         """Manhattan distance from position to goal."""
         return abs(position[0] - self.goal[0]) + abs(position[1] - self.goal[1])
+    
+    def update_walls(self):
+        """Uses LiDAR readings to detect nearby walls and update known_walls set."""
+        lidar_data = get_data() # Get data from lidar
+        for point in lidar_data:
+            if point[0] == 15:  # Only use quality 15 points
+                angle = np.radians(point[1]) # Convert angle to radians
+                distance = point[2] / 100.0  # Convert to meters if needed
+                dx, dy = round(np.sin(angle) * distance), round(np.cos(angle) * distance) # Calculate x and y offsets
+                detected_wall = (self.robot_position[0] + dx, self.robot_position[1] + dy) # Calculate wall position
+                if 0 <= detected_wall[0] < N and 0 <= detected_wall[1] < N: # Check if within bounds
+                    self.known_walls.add(detected_wall) # Add to known walls
 
+    
     def bfs_recalculate_path(self):
         """Recalculates the best path using BFS based on discovered walls."""
         queue = deque([(self.robot_position, [])])
@@ -53,6 +72,7 @@ class DynamicMazeSolver:
                     queue.append(((nr, nc), path + [(nr, nc)]))
         
         return []  # No path found
+
 
     def move_robot(self):
         """Moves the robot optimistically toward the goal."""
@@ -88,36 +108,10 @@ class DynamicMazeSolver:
         print("Robot reached the goal!")
         self.display_maze()
 
-    def display_maze(self):
-        """Displays the maze dynamically with known information."""
-        for r in range(N):
-            for c in range(N):
-                if (r, c) == self.robot_position:
-                    print("M ", end=" ")  # robot position
-                elif (r, c) == self.start:
-                    print("S ", end=" ")  # Start position
-                elif (r, c) == self.goal:
-                    print("G ", end=" ")  # Goal position
-                elif (r, c) in self.known_walls:
-                    print("██", end=" ")  # Discovered wall
-                else:
-                    print(". ", end=" ")  # Unexplored space
-            print()
-
-# Define a hidden 8x8 maze (robot does not initially know this layout)
-maze_grid = [
-    ['S', '.', '█', '█', '█', '█', '█', '█'],
-    ['.', '.', '█', '.', '.', '.', '.', '█'],
-    ['█', '.', '█', '.', '█', '█', '.', '█'],
-    ['█', '.', '.', '.', '█', '█', '.', '█'],
-    ['█', '█', '█', '.', '.', '.', '.', '█'],
-    ['█', '.', '.', '.', '█', '█', '.', '█'],
-    ['█', '.', '█', '█', '█', '█', '.', 'G'],
-    ['█', '█', '█', '█', '█', '█', '█', '█']
-]
-
+# Initialize robot's start position and goal in polar coordinates
 start_position = (0, 0)
-goal_position = (6, 7)
+goal_angle = 45  # Degrees
+goal_distance = 10  # Meters
 
-solver = DynamicMazeSolver(maze_grid, start_position, goal_position)
+solver = DynamicMazeSolver(start_position, goal_angle, goal_distance)
 solver.move_robot()
