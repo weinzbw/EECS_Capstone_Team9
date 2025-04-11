@@ -1,5 +1,7 @@
 # EECS_Capstone_Team9
 
+# ADD TEAM MEMBERS AND LINKS TO THEIR GITHUBS
+
 ## Project Desription
 The Marco Polo Robo (MPR) is a small robot that can play Marco Polo with a person, hiding and seeking capabilities.
 
