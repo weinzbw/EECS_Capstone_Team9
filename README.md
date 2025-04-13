@@ -1,10 +1,10 @@
 # EECS_Capstone_Team9
 
 ## Team Members
-[Benjamin Weinzirl](https://github.com/weinzbw)
-[Del Endecott](https://github.com/d3lwyrn)
-[Samuel Harrison](https://github.com/s768h447)
-[Naran Bat](https://github.com/AnnaAanaa)
+[Benjamin Weinzirl](https://github.com/weinzbw)\
+[Del Endecott](https://github.com/d3lwyrn)\
+[Samuel Harrison](https://github.com/s768h447)\
+[Naran Bat](https://github.com/AnnaAanaa)\
 [Oluwatimilehin Falusi](https://github.com/timfal123)
 
 
