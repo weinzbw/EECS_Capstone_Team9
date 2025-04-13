@@ -1,5 +1,7 @@
 # EECS_Capstone_Team9
 
+# This branch is outdated, please see our up to date branch [here](https://github.com/weinzbw/EECS_Capstone_Team9)
+
 ## Team Members
 [Benjamin Weinzirl](https://github.com/weinzbw)\
 [Del Endecott](https://github.com/d3lwyrn)\
