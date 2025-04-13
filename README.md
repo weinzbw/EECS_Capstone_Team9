@@ -11,7 +11,7 @@
 ## Project Desription
 The Marco Polo Robo (MPR) is a small robot that can play Marco Polo with a person, hiding and seeking capabilities.
 
-[image](https://cdn.discordapp.com/attachments/1002612287942701119/1361116751189774501/20250412_103758.jpg?ex=67fd9641&is=67fc44c1&hm=060d0b9f593ae4a54656646daccff62080b385733e900ed5b5a7b7b34347b413&)
+![image](https://cdn.discordapp.com/attachments/1002612287942701119/1361116751189774501/20250412_103758.jpg?ex=67fd9641&is=67fc44c1&hm=060d0b9f593ae4a54656646daccff62080b385733e900ed5b5a7b7b34347b413&)
 
 ## Parts
 3D Printed Base\
