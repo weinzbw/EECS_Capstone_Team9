@@ -20,7 +20,7 @@ HC-SR501 Infrared PIR motion sensor\
 Ultrasonic Distance Sensor\
 KeeYees L298N Motor Drives and Wheels
 
-## How to Make this Myself
+## How to Make this Yourself
 Assuming you have a PYNQ-Z1 board and the same parts, you will need to connect the pins to the same setup as in our repo
 or edit the code to point to the correct pin connections for the devices.
 
